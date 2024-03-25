@@ -1,3 +1,7 @@
+package View;
+
+import ViewModel.MenuBar;
+
 import javax.swing.*;
 import java.awt.*;
 public class App {
@@ -6,7 +10,7 @@ public class App {
 
     // 建構子
     public App() {
-        frame = new JFrame("Java Swing App");
+        frame = new JFrame("Java Swing View.App");
         label = new JLabel("Hello, World!");
 
         // 設定視窗大小和關閉動作
