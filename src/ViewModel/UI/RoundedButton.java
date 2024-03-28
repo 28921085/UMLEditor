@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 
 public class RoundedButton extends JButton {
-    private static final int CORNER_RADIUS = 5;
+    private static final int CORNER_RADIUS = 15;
     private Image iconImage;
     private Color borderColor;
 
