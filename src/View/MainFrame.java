@@ -34,9 +34,13 @@ public class MainFrame {
 
         // 建立六個按鈕
         JButton button1 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\select.png");
+        //TODO
+        //if group select all group componments else select one
         JButton button2 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\association line.png");
         JButton button3 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\generalization line.png");
         JButton button4 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\composition line.png");
+        //2 3 4 TODO
+        //
         JButton button5 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\class.png");
         JButton button6 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\use case.png");
 

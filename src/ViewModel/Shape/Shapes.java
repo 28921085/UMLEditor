@@ -9,4 +9,7 @@ public abstract class Shapes {
     List<Shapes> connect = new ArrayList<>();
     public abstract void draw(Graphics g);
     public Shapes(int x,int y){this.x=x;this.y=y;}
+    //ToDO
+    //4 direction connect
+    //move
 }

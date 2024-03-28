@@ -43,6 +43,9 @@ public class DrawingPanel extends JPanel {
                 int x = e.getX();
                 int y = e.getY();
                 //System.out.println("滑鼠當前位置：(" + x + ", " + y + ")");
+                //TODO
+                //move componment
+                //select area
             }
         });
     }
