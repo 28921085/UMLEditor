@@ -17,7 +17,7 @@ public class MainFrame {
         canvasPanel = new JPanel();
 
         // 設定視窗大小和關閉動作
-        frame.setSize(1000, 1000);
+        frame.setSize(1500, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // 建立功能列
