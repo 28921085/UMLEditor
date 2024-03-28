@@ -2,6 +2,10 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
 import ViewModel.UI.MenuBar;
 import ViewModel.UI.RoundedButton;
 
@@ -14,7 +18,15 @@ public class MainFrame {
     public MainFrame() {
         frame = new JFrame("Java Swing View.App");
         label = new JLabel("Hello, World!");
-        canvasPanel = new JPanel();
+        canvasPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // 繪製外框
+                g.setColor(Color.BLACK);
+                g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+            }
+        };
 
         // 設定視窗大小和關閉動作
         frame.setSize(1500, 1000);
@@ -28,6 +40,36 @@ public class MainFrame {
 
         // 建立畫布
         canvasPanel.setBackground(Color.WHITE);
+        canvasPanel.addMouseListener(new MouseAdapter() {
+            private int startX, startY;
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                startX = e.getX();
+                startY = e.getY();
+                //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
+            }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                //System.out.println("滑鼠點擊位置：(" + x + ", " + y + ")");
+            }
+        });
+        canvasPanel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                //System.out.println("滑鼠當前位置：(" + x + ", " + y + ")");
+            }
+        });
 
         // 建立六個按鈕
         RoundedButton button1 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\select.png");
@@ -59,6 +101,5 @@ public class MainFrame {
     public void setLabelText(String text) {
         label.setText(text);
     }
-
 
 }
