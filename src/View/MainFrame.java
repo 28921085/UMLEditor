@@ -2,7 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import ViewModel.MenuBar;
+import ViewModel.UI.MenuBar;
+import ViewModel.UI.RoundedButton;
 
 public class MainFrame {
     private JFrame frame;
@@ -16,7 +17,7 @@ public class MainFrame {
         canvasPanel = new JPanel();
 
         // 設定視窗大小和關閉動作
-        frame.setSize(400, 300);
+        frame.setSize(1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // 建立功能列
@@ -29,12 +30,12 @@ public class MainFrame {
         canvasPanel.setBackground(Color.WHITE);
 
         // 建立六個按鈕
-        JButton button1 = new JButton("Button 1");
-        JButton button2 = new JButton("Button 2");
-        JButton button3 = new JButton("Button 3");
-        JButton button4 = new JButton("Button 4");
-        JButton button5 = new JButton("Button 5");
-        JButton button6 = new JButton("Button 6");
+        RoundedButton button1 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\select.png");
+        RoundedButton button2 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\association line.png");
+        RoundedButton button3 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\generalization line.png");
+        RoundedButton button4 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\composition line.png");
+        RoundedButton button5 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\class.png");
+        RoundedButton button6 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\resources\\use case.png");
 
         // 建立按鈕區域的面板
         JPanel buttonPanel = new JPanel();

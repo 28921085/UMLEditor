@@ -1,4 +1,4 @@
-package ViewModel;
+package ViewModel.UI;
 
 import javax.swing.*;
 import java.awt.*;
