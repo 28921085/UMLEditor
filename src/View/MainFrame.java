@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,7 +18,7 @@ public class MainFrame {
 
     // 建構子
     public MainFrame() {
-        frame = new JFrame("Java Swing View.App");
+        frame = new JFrame("UMLEditor");
         label = new JLabel("Hello, World!");
         canvasPanel = new DrawingPanel();
 
@@ -30,7 +31,7 @@ public class MainFrame {
 
         // 設定功能列到視窗中
         frame.setJMenuBar(menuBar.getMenuBar());
-        
+
         // 建立六個按鈕
         JButton button1 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\select.png");
         JButton button2 = new RoundedButton("",System.getProperty("user.dir")+"\\src\\assets\\association line.png");
@@ -42,6 +43,7 @@ public class MainFrame {
         // 建立按鈕區域的面板
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(6, 1)); // 使用 GridLayout 讓按鈕垂直排列
+        buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // 添加间距
         buttonPanel.add(button1);
         buttonPanel.add(button2);
         buttonPanel.add(button3);
