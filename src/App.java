@@ -6,5 +6,7 @@ public class App {
 
         // 修改標籤文字
         mainFrame.setLabelText("Hello, Object-Oriented Programming!");
+        //TODO  bugs
+        //roundedbutton display bug
     }
 }

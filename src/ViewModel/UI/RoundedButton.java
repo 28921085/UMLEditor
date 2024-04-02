@@ -5,11 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 public class RoundedButton extends JButton {
     private static final int CORNER_RADIUS = 15;
     private Image iconImage;
     private Color borderColor;
+    private int width,height;
 
     public RoundedButton(String text, String imagePath) {
         super(text);
@@ -18,11 +21,17 @@ public class RoundedButton extends JButton {
         setBorderPainted(false);
 
         // 載入圖片
-        ImageIcon icon = new ImageIcon(imagePath);
-        iconImage = icon.getImage().getScaledInstance(icon.getIconWidth(), icon.getIconHeight(), Image.SCALE_SMOOTH);
+        ImageIcon tmp = new ImageIcon(imagePath);
+        width = 100;
+        height = 100;
+        iconImage = tmp.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(iconImage);
         setBorderColorBlack();
 
         // 設定按鈕大小
+
+        // 設置按鈕大小
+        //setBounds(0, 0, width, height);
         setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 
         // 添加點擊事件監聽器
@@ -38,24 +47,14 @@ public class RoundedButton extends JButton {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
-        int width = getWidth();
-        int height = getHeight();
 
         // 繪製圓角矩形背景
         g2.setColor(getBackground());
         g2.fill(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, CORNER_RADIUS, CORNER_RADIUS));
 
         // 繪製圖片
-        if (iconImage != null) {
-            int iconWidth = iconImage.getWidth(null);
-            int iconHeight = iconImage.getHeight(null);
-            int x = (width - iconWidth) / 2;
-            int y = (height - iconHeight) / 2;
-            g2.drawImage(iconImage, x, y, iconWidth, iconHeight, null);
-        }
-
-        // 繪製文字
-        //super.paintComponent(g);
+        if (iconImage != null)
+            g2.drawImage(iconImage, 0,0, width, height, null);
     }
 
     @Override
@@ -63,8 +62,8 @@ public class RoundedButton extends JButton {
         if (borderColor != null) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setColor(borderColor);
-            g2.setStroke(new BasicStroke(2)); // 設置邊框寬度
-            g2.draw(new RoundRectangle2D.Double(0, 0, getWidth() - 1, getHeight() - 1, CORNER_RADIUS, CORNER_RADIUS));
+            g2.setStroke(new BasicStroke(4)); // 設置邊框寬度
+            g2.draw(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, CORNER_RADIUS, CORNER_RADIUS));
             g2.dispose();
         }
     }
@@ -77,5 +76,8 @@ public class RoundedButton extends JButton {
     public void setBorderColorRed() {
         borderColor = Color.RED;
         repaint();
+    }
+    public void resetButton(RoundedButton button){
+        button.setBorderColorBlack();
     }
 }

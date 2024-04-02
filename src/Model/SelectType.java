@@ -6,13 +6,14 @@ public enum SelectType {
     GENERALIZATION_LINE,
     COMPOSITION_LINE,
     CLASS,
-    USE_CASE;
+    USE_CASE,
+    NONE;
     public String getFileName(){
         String res=System.getProperty("user.dir");
         switch (this){
             case SELECT:
-                 res+="\\src\\assets\\select.png";
-                 break;
+                res+="\\src\\assets\\select.png";
+                break;
             case ASSOCIATION_LINE:
                 res+="\\src\\assets\\association line.png";
                 break;
@@ -28,6 +29,8 @@ public enum SelectType {
             case USE_CASE:
                 res+="\\src\\assets\\use case.png";
                 break;
+            default:
+                return "";
         }
         return res;
     }
