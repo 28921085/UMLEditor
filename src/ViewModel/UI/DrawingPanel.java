@@ -23,13 +23,15 @@ public class DrawingPanel extends JPanel implements SelectObserver {
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
                 startY = e.getY();
+                componments.add(new UseCaseShape(startX,startY));
+                repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
             @Override
             public void mouseReleased(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
-                componments.add(new MyRectangle(startX,startY));
+
                 repaint();
                 //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
             }
@@ -37,6 +39,8 @@ public class DrawingPanel extends JPanel implements SelectObserver {
             public void mouseClicked(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
+
+                repaint();
                 //System.out.println("滑鼠點擊位置：(" + x + ", " + y + ")");
             }
         });
@@ -45,6 +49,7 @@ public class DrawingPanel extends JPanel implements SelectObserver {
             public void mouseDragged(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
+                repaint();
                 //System.out.println("滑鼠當前位置：(" + x + ", " + y + ")");
                 //TODO
                 //move componment

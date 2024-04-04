@@ -6,10 +6,20 @@ import java.util.List;
 
 public abstract class Shapes {
     int x,y,depth;
+    boolean isSelected;
+    String name;
     List<Shapes> connect = new ArrayList<>();
     public abstract void draw(Graphics g);
-    public Shapes(int x,int y){this.x=x;this.y=y;}
+    public Shapes(int x,int y){
+        this.x=x;
+        this.y=y;
+        isSelected = false;
+        name = "";
+    }
+    public void move(int x,int y){
+        //move component
+    }
     //ToDO
     //4 direction connect
-    //move
+
 }
