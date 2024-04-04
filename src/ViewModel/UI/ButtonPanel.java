@@ -43,7 +43,7 @@ public class ButtonPanel extends JPanel{
     public void addObserver(ModeObserver observer) {
         observers.add(observer);
     }
-    //當select type改變時，通知所有觀察者
+    //當mode type改變時，通知所有觀察者
     private void notifyObservers(ModeType modeType) {
         for (ModeObserver observer : observers)
             observer.updateSelect(modeType);

@@ -23,7 +23,10 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
                 startY = e.getY();
-                componments.add(new UseCaseShape(startX,startY));
+                if(currentMode == ModeType.CLASS)
+                    componments.add(new ClassShape(startX,startY));
+                else if(currentMode == ModeType.USE_CASE)
+                    componments.add(new UseCaseShape(startX,startY));
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
@@ -35,14 +38,13 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 repaint();
                 //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
             }
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-
-                repaint();
-                //System.out.println("滑鼠點擊位置：(" + x + ", " + y + ")");
-            }
+            //@Override
+            //public void mouseClicked(MouseEvent e) {
+            //    int x = e.getX();
+            //    int y = e.getY();
+            //    repaint();
+            //    //System.out.println("滑鼠點擊位置：(" + x + ", " + y + ")");
+            //}
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override

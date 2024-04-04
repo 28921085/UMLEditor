@@ -9,7 +9,9 @@ public abstract class Shapes {
     boolean isSelected;
     String name;
     List<Shapes> connect = new ArrayList<>();
+
     public abstract void draw(Graphics g);
+
     public Shapes(int x,int y){
         this.x=x;
         this.y=y;
@@ -19,6 +21,7 @@ public abstract class Shapes {
     public void move(int x,int y){
         //move component
     }
+    public void changeSelectedState(){isSelected = !isSelected;}
     //ToDO
     //4 direction connect
 
