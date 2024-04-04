@@ -1,7 +1,7 @@
 package ViewModel.UI;
 
-import Model.SelectType;
-import Model.SelectObserver;
+import Model.ModeType;
+import Model.ModeObserver;
 import ViewModel.Shape.*;
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +11,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.List;
 import java.util.ArrayList;
 
-public class DrawingPanel extends JPanel implements SelectObserver {
-    private SelectType currentSelect;
+public class DrawingPanel extends JPanel implements ModeObserver {
+    private ModeType currentMode;
     private List<Shapes>componments=new ArrayList<>();
     public DrawingPanel() {
         this.setBackground(Color.WHITE);
@@ -58,7 +58,7 @@ public class DrawingPanel extends JPanel implements SelectObserver {
         });
     }
     public void debug(){
-        System.out.println(currentSelect);
+        System.out.println(currentMode);
     }
     // 绘制方法
     protected void paintComponent(Graphics g) {
@@ -67,8 +67,8 @@ public class DrawingPanel extends JPanel implements SelectObserver {
             s.draw(g);
     }
     @Override
-    public void updateSelect(SelectType selectType) {
-        setCurrentSelect(selectType);
+    public void updateSelect(ModeType modeType) {
+        setCurrentMode(modeType);
     }
-    public void setCurrentSelect(SelectType currentSelect) {this.currentSelect = currentSelect;}
+    public void setCurrentMode(ModeType currentMode) {this.currentMode = currentMode;}
 }

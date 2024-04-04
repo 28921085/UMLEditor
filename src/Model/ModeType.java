@@ -1,6 +1,6 @@
 package Model;
 
-public enum SelectType {
+public enum ModeType {
     SELECT,
     ASSOCIATION_LINE,
     GENERALIZATION_LINE,
