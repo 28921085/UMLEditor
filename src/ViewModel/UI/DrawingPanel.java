@@ -26,11 +26,14 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 if(currentMode == ModeType.SELECT){
 
                 }
-                else if(currentMode == ModeType.CLASS)
-                    components.add(new ClassShape(startX,startY,101,101));
-                else if(currentMode == ModeType.USE_CASE)
-                    components.add(new UseCaseShape(startX,startY,101,51));
-
+                else if(currentMode == ModeType.CLASS) {
+                    components.add(0,new ClassShape(startX, startY, 101, 101));
+                    reorderedComponentDepth();
+                }
+                else if(currentMode == ModeType.USE_CASE) {
+                    components.add(0,new UseCaseShape(startX, startY, 101, 51));
+                    reorderedComponentDepth();
+                }
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
@@ -69,9 +72,15 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         else
             Collections.sort(components,Collections.reverseOrder());
     }
+    void reorderedComponentDepth(){
+        for(int i=0;i<components.size();i++)
+            components.get(i).setDepth(i);
+    }
     // 绘制方法
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        //較深的先畫
+        sortComponentByDepth(false);
         for (Shapes s : components)
             s.draw(g);
     }
