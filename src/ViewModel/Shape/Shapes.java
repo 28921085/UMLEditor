@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Shapes {
+public abstract class Shapes implements Comparable<Shapes>{
     int x,y,width,height,depth;
     boolean isSelected;
     String name;
@@ -19,7 +19,9 @@ public abstract class Shapes {
         this.y=y;
         this.width=width;
         this.height=height;
-        isSelected = true;
+        isSelected = false;
+        //debug
+        //isSelected = true;
         name = "";
         generateConnectionPoints();
     }
@@ -46,6 +48,12 @@ public abstract class Shapes {
     public void changeSelectedState(){isSelected = !isSelected;}
     public boolean getSelectedState(){return isSelected;}
     public void setSelectedState(boolean state){isSelected = state;}
+    public void setDepth(int depth){this.depth=depth;}
+    @Override
+    public int compareTo(Shapes other) {
+        // 升序排序
+        return this.depth - other.depth;
+    }
     //ToDO
     //4 direction connect
 

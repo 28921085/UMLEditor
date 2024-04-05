@@ -16,8 +16,9 @@ public class ConnectionPoint {
         this.y=y;
         this.width=width;
         this.direction=direction;
-        //connectType=ConnectType.NONE;
-        connectType=ConnectType.COMPOSITION_LINE_END;
+        connectType=ConnectType.NONE;
+        //debug
+        //connectType=ConnectType.COMPOSITION_LINE_END;
     }
     public void draw(Graphics g){
         g.setColor(Color.BLUE);

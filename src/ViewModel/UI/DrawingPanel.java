@@ -8,25 +8,29 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
 public class DrawingPanel extends JPanel implements ModeObserver {
     private ModeType currentMode;
-    private List<Shapes>componments=new ArrayList<>();
+    private List<Shapes>components=new ArrayList<>();
     public DrawingPanel() {
         this.setBackground(Color.WHITE);
         this.addMouseListener(new MouseAdapter() {
             private int startX, startY;
-
             @Override
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
                 startY = e.getY();
-                if(currentMode == ModeType.CLASS)
-                    componments.add(new ClassShape(startX,startY,101,101));
+                if(currentMode == ModeType.SELECT){
+
+                }
+                else if(currentMode == ModeType.CLASS)
+                    components.add(new ClassShape(startX,startY,101,101));
                 else if(currentMode == ModeType.USE_CASE)
-                    componments.add(new UseCaseShape(startX,startY,101,51));
+                    components.add(new UseCaseShape(startX,startY,101,51));
+
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
@@ -54,18 +58,21 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 repaint();
                 //System.out.println("滑鼠當前位置：(" + x + ", " + y + ")");
                 //TODO
-                //move componment
+                //move components
                 //select area
             }
         });
     }
-    public void debug(){
-        System.out.println(currentMode);
+    public void sortComponentByDepth(boolean isAscendingOrder){
+        if(isAscendingOrder)
+            Collections.sort(components);
+        else
+            Collections.sort(components,Collections.reverseOrder());
     }
     // 绘制方法
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Shapes s : componments)
+        for (Shapes s : components)
             s.draw(g);
     }
     @Override
