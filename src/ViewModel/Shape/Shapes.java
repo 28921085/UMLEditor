@@ -24,16 +24,16 @@ public abstract class Shapes {
         generateConnectionPoints();
     }
     public void generateConnectionPoints(){
-        connectionPoints.add(new ConnectionPoint(x+width/2,y, Direction.NORTH));
-        connectionPoints.add(new ConnectionPoint(x+width,y+height/2,Direction.EAST));
-        connectionPoints.add(new ConnectionPoint(x+width/2,y+height,Direction.SOUTH));
-        connectionPoints.add(new ConnectionPoint(x,y+height/2,Direction.WEST));
+        connectionPoints.add(new ConnectionPoint(x+width/2,y,4, Direction.NORTH));
+        connectionPoints.add(new ConnectionPoint(x+width,y+height/2,4,Direction.EAST));
+        connectionPoints.add(new ConnectionPoint(x+width/2,y+height,4,Direction.SOUTH));
+        connectionPoints.add(new ConnectionPoint(x,y+height/2,4,Direction.WEST));
     }
     public void drawConnectionPoints(Graphics g){
         if(!isSelected)
             return;
         for(ConnectionPoint point:connectionPoints)
-            point.draw();
+            point.draw(g);
     }
     public void draw(Graphics g){
         drawShape(g);
