@@ -28,6 +28,7 @@ public abstract class Shapes {
         connectionPoints.add(new ConnectionPoint(x+width,y+height/2,11,Direction.EAST));
         connectionPoints.add(new ConnectionPoint(x+width/2,y+height,11,Direction.SOUTH));
         connectionPoints.add(new ConnectionPoint(x,y+height/2,11,Direction.WEST));
+        //TODO check this point position may have bug
     }
     public void drawConnectionPoints(Graphics g){
         if(!isSelected)

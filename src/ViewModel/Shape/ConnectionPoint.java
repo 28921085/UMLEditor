@@ -16,7 +16,8 @@ public class ConnectionPoint {
         this.y=y;
         this.width=width;
         this.direction=direction;
-        connectType=ConnectType.NONE;
+        //connectType=ConnectType.NONE;
+        connectType=ConnectType.COMPOSITION_LINE_END;
     }
     public void draw(Graphics g){
         g.setColor(Color.BLUE);
@@ -25,14 +26,13 @@ public class ConnectionPoint {
     }
 
     public void drawPlug(Graphics g){
-        int width = 20,height = 10;
-        //g.drawOval(x,y,width,height);
-
         Graphics2D g2d = (Graphics2D) g.create(); // 创建副本以免影响原始 Graphics 对象
         g2d.rotate(Math.toRadians(direction.getDegree()), x, y);
 
-        //g2d.drawOval(x - width / 2, y - height / 2, width, height);
-        connectType.draw(g2d);
+        g2d.setStroke(new BasicStroke(3));
+        //抗鋸齒 看起來會好看點
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        connectType.draw(g2d,x,y,ARROW_WIDTH);
 
         g2d.dispose();
     }

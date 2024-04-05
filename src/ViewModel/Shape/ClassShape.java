@@ -11,8 +11,10 @@ public class ClassShape extends Shapes{
         // 設置邊框粗細
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(stroke));
+        //抗鋸齒 看起來會好看點
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // 绘制边框的正方形
-        g.drawRect(X, Y, width, height);
+        g2d.drawRect(X, Y, width, height);
     }
     public void drawShape(Graphics g){
         drawRectangleWithStroke(x,y,width,height/3,3,g);

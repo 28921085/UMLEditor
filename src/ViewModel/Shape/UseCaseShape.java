@@ -11,8 +11,10 @@ public class UseCaseShape extends Shapes{
         // 設置邊框粗細
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(stroke));
+        //抗鋸齒 看起來會好看點
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // 绘制边框的椭圆
-        g.drawOval(X, Y, width, height);
+        g2d.drawOval(X, Y, width, height);
     }
     public void drawShape(Graphics g){
         drawOvalWithStroke(x,y,width,height,3,g);
