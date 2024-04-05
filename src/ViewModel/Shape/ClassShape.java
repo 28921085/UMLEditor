@@ -1,5 +1,7 @@
 package ViewModel.Shape;
 
+import Model.Direction;
+
 import java.awt.*;
 
 public class ClassShape extends Shapes{
@@ -15,9 +17,9 @@ public class ClassShape extends Shapes{
         g.drawRect(X, Y, width, height);
     }
     public void draw(Graphics g){
-        drawRectangleWithStroke(x,y,100,30,3,g);
-        drawRectangleWithStroke(x,y+30,100,35,3,g);
-        drawRectangleWithStroke(x,y+65,100,35,3,g);
+        drawRectangleWithStroke(x,y,width,height/3,3,g);
+        drawRectangleWithStroke(x,y+width/3,width,height/3,3,g);
+        drawRectangleWithStroke(x,y+width/3*2,width,height/3,3,g);
     }
-    public ClassShape(int x, int y){super(x,y);}
+    public ClassShape(int x, int y,int width,int height){super(x,y,width,height);}
 }

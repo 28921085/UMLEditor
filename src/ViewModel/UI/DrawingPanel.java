@@ -24,9 +24,9 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 startX = e.getX();
                 startY = e.getY();
                 if(currentMode == ModeType.CLASS)
-                    componments.add(new ClassShape(startX,startY));
+                    componments.add(new ClassShape(startX,startY,100,100));
                 else if(currentMode == ModeType.USE_CASE)
-                    componments.add(new UseCaseShape(startX,startY));
+                    componments.add(new UseCaseShape(startX,startY,100,50));
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }

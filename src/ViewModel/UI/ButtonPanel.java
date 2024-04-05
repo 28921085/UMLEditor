@@ -13,6 +13,7 @@ public class ButtonPanel extends JPanel{
     private List<RoundedButton> buttons = new ArrayList<>();
     private List<ModeObserver> observers = new ArrayList<>();
     public ButtonPanel(){
+        super();
         currentMode = ModeType.NONE;
         for(ModeType type: ModeType.values()){
             if(type == ModeType.NONE)

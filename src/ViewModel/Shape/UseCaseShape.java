@@ -15,7 +15,7 @@ public class UseCaseShape extends Shapes{
         g.drawOval(X, Y, width, height);
     }
     public void draw(Graphics g){
-        drawOvalWithStroke(x,y,100,50,3,g);
+        drawOvalWithStroke(x,y,width,height,3,g);
     }
-    public UseCaseShape(int x, int y){super(x,y);}
+    public UseCaseShape(int x, int y,int width,int height){super(x,y,width,height);}
 }
