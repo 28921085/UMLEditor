@@ -14,7 +14,7 @@ public class UseCaseShape extends Shapes{
         // 绘制边框的椭圆
         g.drawOval(X, Y, width, height);
     }
-    public void draw(Graphics g){
+    public void drawShape(Graphics g){
         drawOvalWithStroke(x,y,width,height,3,g);
     }
     public UseCaseShape(int x, int y,int width,int height){super(x,y,width,height);}

@@ -12,7 +12,7 @@ public abstract class Shapes {
     String name;
     List<Shapes> connect = new ArrayList<>();
     List<ConnectionPoint>connectionPoints = new ArrayList<>();
-    public abstract void draw(Graphics g);
+    public abstract void drawShape(Graphics g);
 
     public Shapes(int x,int y,int width,int height){
         this.x=x;
@@ -30,11 +30,14 @@ public abstract class Shapes {
         connectionPoints.add(new ConnectionPoint(x,y+height/2,Direction.WEST));
     }
     public void drawConnectionPoints(Graphics g){
-        draw(g);
         if(!isSelected)
             return;
         for(ConnectionPoint point:connectionPoints)
             point.draw();
+    }
+    public void draw(Graphics g){
+        drawShape(g);
+        drawConnectionPoints(g);
     }
     public void move(int x,int y){
         //move component

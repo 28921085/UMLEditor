@@ -16,7 +16,7 @@ public class ClassShape extends Shapes{
         // 绘制边框的正方形
         g.drawRect(X, Y, width, height);
     }
-    public void draw(Graphics g){
+    public void drawShape(Graphics g){
         drawRectangleWithStroke(x,y,width,height/3,3,g);
         drawRectangleWithStroke(x,y+width/3,width,height/3,3,g);
         drawRectangleWithStroke(x,y+width/3*2,width,height/3,3,g);
