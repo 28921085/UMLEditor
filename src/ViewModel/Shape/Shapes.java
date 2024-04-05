@@ -19,7 +19,7 @@ public abstract class Shapes {
         this.y=y;
         this.width=width;
         this.height=height;
-        isSelected = false;
+        isSelected = true;
         name = "";
         generateConnectionPoints();
     }

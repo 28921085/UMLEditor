@@ -1,7 +1,5 @@
 package ViewModel.Shape;
 
-import Model.Direction;
-
 import java.awt.*;
 
 public class ClassShape extends Shapes{

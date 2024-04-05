@@ -20,6 +20,13 @@ public class ConnectionPoint {
     public void draw(Graphics g){
         g.setColor(Color.BLUE);
         g.drawRect(x-width/2,y-width/2,width,width);
+        drawPlug(g);
+    }
+    public void drawPlug(Graphics g){
+        int width = 20,height = 10;
+        g.drawOval(x,y,width,height);
+        //rotate 90 degree
+        
     }
     public void move(int x,int y){
         //TODO
