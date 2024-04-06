@@ -1,5 +1,6 @@
 package ViewModel.Shape;
 
+import Model.ConnectType;
 import Model.Direction;
 
 import java.awt.*;
@@ -38,19 +39,26 @@ public abstract class Shapes{
     }
     public void draw(Graphics g){
         //debug
-        debug(g);
+        //debug(g);
         drawShape(g);
         drawConnectionPoints(g);
+    }
+    public boolean isInside(int x,int y){
+        if(x<this.x||y<this.y)
+            return false;
+        if(x>this.x+width||y>this.y+height)
+            return false;
+        return true;
     }
     public void move(int x,int y){
         //move component
     }
     public void debug(Graphics g){
         isSelected = true;
-        
+        for(ConnectionPoint point:connectionPoints)
+            point.setConnectType(ConnectType.ASSOCIATION_LINE_END);
         g.drawString(String.valueOf(depth),x,y);
     }
-    public void changeSelectedState(){isSelected = !isSelected;}
     public boolean getSelectedState(){return isSelected;}
     public void setSelectedState(boolean state){isSelected = state;}
     public void setDepth(int depth){this.depth=depth;}

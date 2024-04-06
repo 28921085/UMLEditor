@@ -23,7 +23,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 startX = e.getX();
                 startY = e.getY();
                 if(currentMode == ModeType.SELECT){
-
+                    selectAtPoint(startX,startY);
                 }
                 else if(currentMode == ModeType.CLASS) {
                     components.add(0,new ClassShape(startX, startY, 101, 101));
@@ -65,7 +65,26 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             }
         });
     }
-    void reorderedComponentDepth(){
+    void selectAtPoint(int x,int y){
+        for(int i=0;i<components.size();i++){
+            if(components.get(i).isInside(x,y)){//click最上層
+                if(components.get(i).getSelectedState())//本來就選取->取消選取
+                    unSelectAllComponents();
+                else {//本來未選取->選取
+                    unSelectAllComponents();
+                    components.get(i).setSelectedState(true);
+                }
+                components.add(0,components.remove(i));
+                reorderedComponentDepth();
+                break;
+            }
+        }
+    }
+    void unSelectAllComponents(){
+        for(Shapes shape:components)
+            shape.setSelectedState(false);
+    }
+    void reorderedComponentDepth(){//變相地進行sort
         for(int i=0;i<components.size();i++)
             components.get(i).setDepth(i);
     }
