@@ -10,14 +10,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class DrawingPanel extends JPanel implements ModeObserver {
     private ModeType currentMode;
     private List<Shapes>components=new ArrayList<>();
+    private boolean mouseIsDragging;
+    private int startX, startY,draggedX,draggedY;
     public DrawingPanel() {
+
         this.setBackground(Color.WHITE);
         this.addMouseListener(new MouseAdapter() {
-            private int startX, startY;
+
             @Override
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
@@ -40,9 +44,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             public void mouseReleased(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
-
+                mouseIsDragging = false;
                 repaint();
                 //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
+                //TODO
+                //group
             }
             //@Override
             //public void mouseClicked(MouseEvent e) {
@@ -55,13 +61,14 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
+                draggedX = e.getX();
+                draggedY = e.getY();
+                mouseIsDragging = true;
                 repaint();
-                //System.out.println("滑鼠當前位置：(" + x + ", " + y + ")");
+                //System.out.println("滑鼠dragged位置：(" + x + ", " + y + ")");
                 //TODO
                 //move components
-                //select area
+
             }
         });
     }
@@ -80,6 +87,17 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             }
         }
     }
+    void drawSelectedArea(int x1,int y1,int x2,int y2,Graphics g){
+        int width = Math.abs(x2-x1),height = Math.abs(y2-y1);
+        int x = Math.min(x1,x2), y = Math.min(y1,y2);
+        Graphics2D g2d = (Graphics2D) g;
+        // 设置透明度为 50%
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        // 绘制透明的矩形
+        g2d.setColor(Color.BLUE);
+        g2d.fillRect(x, y, width, height);
+        g2d.drawRect(x,y,width,height);
+    }
     void unSelectAllComponents(){
         for(Shapes shape:components)
             shape.setSelectedState(false);
@@ -94,6 +112,8 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         //較深的先畫
         for (int i=components.size()-1;i>-1;i--)
             components.get(i).draw(g);
+        if(currentMode == ModeType.SELECT&&mouseIsDragging)
+            drawSelectedArea(startX,startY,draggedX,draggedY,g);
     }
     @Override
     public void updateSelect(ModeType modeType) {
