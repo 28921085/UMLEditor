@@ -39,6 +39,15 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                     reorderedComponentDepth();
                     unSelectAllComponents();
                 }
+                else if(currentMode == ModeType.ASSOCIATION_LINE){
+
+                }
+                else if(currentMode == ModeType.COMPOSITION_LINE){
+
+                }
+                else if(currentMode == ModeType.GENERALIZATION_LINE){
+                    
+                }
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
@@ -77,10 +86,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         });
     }
     void selectAtPoint(int x,int y){
+        currentSelect = null;
+        unSelectAllComponents();
         for(int i=0;i<components.size();i++){
             if(components.get(i).isInside(x,y)){//click最上層
                 //不要新增在點一次取消選取，不然會很難做
-                unSelectAllComponents();
                 components.get(i).setSelectedState(true);
                 currentSelect = components.get(i);
 
