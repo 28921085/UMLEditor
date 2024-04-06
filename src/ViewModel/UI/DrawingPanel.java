@@ -17,11 +17,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     private List<Shapes>components=new ArrayList<>();
     private boolean mouseIsDragging;
     private int startX, startY,draggedX,draggedY;
+    private Shapes currentSelect=null;
     public DrawingPanel() {
 
         this.setBackground(Color.WHITE);
         this.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
@@ -32,10 +32,12 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 else if(currentMode == ModeType.CLASS) {
                     components.add(0,new ClassShape(startX, startY, 101, 101));
                     reorderedComponentDepth();
+                    unSelectAllComponents();
                 }
                 else if(currentMode == ModeType.USE_CASE) {
                     components.add(0,new UseCaseShape(startX, startY, 101, 51));
                     reorderedComponentDepth();
+                    unSelectAllComponents();
                 }
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
@@ -64,23 +66,24 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 draggedX = e.getX();
                 draggedY = e.getY();
                 mouseIsDragging = true;
+                if(currentMode == ModeType.SELECT&&currentSelect != null){//每次觸發mouse dragged都視為一個獨立的事件
+                    currentSelect.move(draggedX-startX,draggedY-startY);
+                    startX=draggedX;
+                    startY=draggedY;
+                }
                 repaint();
                 //System.out.println("滑鼠dragged位置：(" + x + ", " + y + ")");
-                //TODO
-                //move components
-
             }
         });
     }
     void selectAtPoint(int x,int y){
         for(int i=0;i<components.size();i++){
             if(components.get(i).isInside(x,y)){//click最上層
-                if(components.get(i).getSelectedState())//本來就選取->取消選取
-                    unSelectAllComponents();
-                else {//本來未選取->選取
-                    unSelectAllComponents();
-                    components.get(i).setSelectedState(true);
-                }
+                //不要新增在點一次取消選取，不然會很難做
+                unSelectAllComponents();
+                components.get(i).setSelectedState(true);
+                currentSelect = components.get(i);
+
                 components.add(0,components.remove(i));
                 reorderedComponentDepth();
                 break;
@@ -99,6 +102,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         g2d.drawRect(x,y,width,height);
     }
     void unSelectAllComponents(){
+        currentSelect = null;
         for(Shapes shape:components)
             shape.setSelectedState(false);
     }

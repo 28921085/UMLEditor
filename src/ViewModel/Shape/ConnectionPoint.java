@@ -17,8 +17,6 @@ public class ConnectionPoint {
         this.width=width;
         this.direction=direction;
         connectType=ConnectType.NONE;
-        //debug
-        //connectType=ConnectType.COMPOSITION_LINE_END;
     }
     public void draw(Graphics g){
         g.setColor(Color.BLUE);
@@ -38,6 +36,7 @@ public class ConnectionPoint {
         g2d.dispose();
     }
     public void move(int x,int y){
-        //TODO
+        this.x+=x;
+        this.y+=y;
     }
 }

@@ -51,7 +51,10 @@ public abstract class Shapes{
         return true;
     }
     public void move(int x,int y){
-        //move component
+        this.x+=x;
+        this.y+=y;
+        for(ConnectionPoint point:connectionPoints)
+            point.move(x,y);
     }
     public void debug(Graphics g){
         isSelected = true;
