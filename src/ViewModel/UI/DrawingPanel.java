@@ -20,6 +20,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     private int startX, startY,draggedX,draggedY;
     private Shapes currentSelect=null;
     private ConnectionPoint currentSelectPoint = null;
+    private ConnectionLine currentDrawing = null;
     public DrawingPanel() {
 
         this.setBackground(Color.WHITE);
@@ -43,10 +44,13 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 }
                 else if(currentMode == ModeType.ASSOCIATION_LINE){
                     selectAtPoint(startX,startY);
-                    if(currentSelect != null)
-                        currentSelectPoint = currentSelect.assignConnectionPoint(startX,startY);
-                    if(currentSelectPoint != null)
-                        currentSelectPoint.setConnectType(ConnectType.ASSOCIATION_LINE_END);
+                    if(currentSelect != null) {//有點到shape上
+                        currentSelectPoint = currentSelect.assignConnectionPoint(startX, startY);
+                        int x=currentSelectPoint.getX(),y=currentSelectPoint.getY();
+                        currentDrawing = new ConnectionLine(x,y,x,y);
+                    }
+                    //if(currentSelectPoint != null)
+                    //    currentSelectPoint.setConnectType(ConnectType.ASSOCIATION_LINE_END);
                     //unSelectAllComponents();
                 }
                 else if(currentMode == ModeType.COMPOSITION_LINE){
@@ -64,10 +68,12 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 int y = e.getY();
                 mouseIsDragging = false;
 
-                if(currentSelectPoint != null) {
-                    currentSelectPoint.setConnectType(ConnectType.NONE);
-                    currentSelectPoint = null;
-                }
+                //if(currentSelectPoint != null) {
+                //    currentSelectPoint.setConnectType(ConnectType.NONE);
+                //    currentSelectPoint = null;
+                //}
+                currentSelectPoint = null;
+                currentDrawing = null;
                 repaint();
                 //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
                 //TODO
@@ -89,6 +95,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 mouseIsDragging = true;
                 if(currentMode == ModeType.SELECT&&currentSelect != null){//每次觸發mouse dragged都視為一個獨立的事件
                     currentSelect.move(draggedX-startX,draggedY-startY);
+                    startX=draggedX;
+                    startY=draggedY;
+                }
+                else if(currentMode == ModeType.ASSOCIATION_LINE&&currentDrawing != null){
+                    currentDrawing.moveEnd(draggedX-startX,draggedY-startY);
                     startX=draggedX;
                     startY=draggedY;
                 }
@@ -140,6 +151,9 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             components.get(i).draw(g);
         if(currentMode == ModeType.SELECT&&mouseIsDragging)
             drawSelectedArea(startX,startY,draggedX,draggedY,g);
+
+        if(currentDrawing!=null)
+            currentDrawing.draw(g);
     }
     @Override
     public void updateSelect(ModeType modeType) {

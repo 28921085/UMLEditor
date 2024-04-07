@@ -1,8 +1,5 @@
 package ViewModel.Shape;
 
-import Model.ConnectType;
-import Model.Direction;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +22,10 @@ public abstract class Shapes{
         generateConnectionPoints();
     }
     public void generateConnectionPoints(){
-        connectionPoints.add(new ConnectionPoint(x+width/2,y,11, Direction.NORTH));
-        connectionPoints.add(new ConnectionPoint(x+width,y+height/2,11,Direction.EAST));
-        connectionPoints.add(new ConnectionPoint(x+width/2,y+height,11,Direction.SOUTH));
-        connectionPoints.add(new ConnectionPoint(x,y+height/2,11,Direction.WEST));
+        connectionPoints.add(new ConnectionPoint(x+width/2,y,11));
+        connectionPoints.add(new ConnectionPoint(x+width,y+height/2,11));
+        connectionPoints.add(new ConnectionPoint(x+width/2,y+height,11));
+        connectionPoints.add(new ConnectionPoint(x,y+height/2,11));
         //TODO check this point position may have bug
     }
     public void drawConnectionPoints(Graphics g){
@@ -58,8 +55,6 @@ public abstract class Shapes{
     }
     public void debug(Graphics g){
         isSelected = true;
-        for(ConnectionPoint point:connectionPoints)
-            point.setConnectType(ConnectType.ASSOCIATION_LINE_END);
         g.drawString(String.valueOf(depth),x,y);
     }
     public boolean getSelectedState(){return isSelected;}
