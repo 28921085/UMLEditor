@@ -42,7 +42,8 @@ public class ConnectionLine {
         return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
     }
     public void draw(Graphics g){
-        //double len = distance(startX,startY,endX,endY)-ARROW_WIDTH;
+        if(distance(startX,startY,endX,endY)<ARROW_WIDTH)
+            return;
         g.setColor(Color.BLACK);
         g.drawLine(startX,startY,endX,endY);
     }
