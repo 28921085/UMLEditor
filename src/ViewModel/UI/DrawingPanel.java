@@ -1,5 +1,6 @@
 package ViewModel.UI;
 
+import Model.ConnectType;
 import Model.ModeType;
 import Model.ModeObserver;
 import ViewModel.Shape.*;
@@ -18,6 +19,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     private boolean mouseIsDragging;
     private int startX, startY,draggedX,draggedY;
     private Shapes currentSelect=null;
+    private ConnectionPoint currentSelectPoint = null;
     public DrawingPanel() {
 
         this.setBackground(Color.WHITE);
@@ -40,13 +42,18 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                     unSelectAllComponents();
                 }
                 else if(currentMode == ModeType.ASSOCIATION_LINE){
-
+                    selectAtPoint(startX,startY);
+                    if(currentSelect != null)
+                        currentSelectPoint = currentSelect.assignConnectionPoint(startX,startY);
+                    if(currentSelectPoint != null)
+                        currentSelectPoint.setConnectType(ConnectType.ASSOCIATION_LINE_END);
+                    //unSelectAllComponents();
                 }
                 else if(currentMode == ModeType.COMPOSITION_LINE){
-
+                    unSelectAllComponents();
                 }
                 else if(currentMode == ModeType.GENERALIZATION_LINE){
-                    
+                    unSelectAllComponents();
                 }
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
@@ -56,6 +63,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 int x = e.getX();
                 int y = e.getY();
                 mouseIsDragging = false;
+
+                if(currentSelectPoint != null) {
+                    currentSelectPoint.setConnectType(ConnectType.NONE);
+                    currentSelectPoint = null;
+                }
                 repaint();
                 //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
                 //TODO

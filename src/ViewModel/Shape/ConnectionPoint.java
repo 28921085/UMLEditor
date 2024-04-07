@@ -10,7 +10,7 @@ public class ConnectionPoint {
     private final int ARROW_WIDTH=21;//odd is better
     ConnectType connectType;
     Direction direction;
-    void setConnectType(ConnectType type){connectType=type;}
+    public void setConnectType(ConnectType type){connectType=type;}
     public ConnectionPoint(int x,int y,int width,Direction direction){
         this.x=x;
         this.y=y;

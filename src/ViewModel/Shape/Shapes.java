@@ -65,7 +65,16 @@ public abstract class Shapes{
     public boolean getSelectedState(){return isSelected;}
     public void setSelectedState(boolean state){isSelected = state;}
     public void setDepth(int depth){this.depth=depth;}
-    //ToDO
-    //4 direction connect
-
+    public double distance(int x1,int y1,int x2,int y2){
+        return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
+    }
+    public ConnectionPoint assignConnectionPoint(int x,int y){
+        double min=1e9;//inf
+        for(ConnectionPoint point:connectionPoints)
+            min = Math.min(min,distance(point.x,point.y,x,y));
+        for(ConnectionPoint point:connectionPoints)
+            if(distance(point.x,point.y,x,y)==min)
+                return point;
+        return null;
+    }
 }
