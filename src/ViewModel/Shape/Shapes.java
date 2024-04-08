@@ -52,13 +52,10 @@ public abstract class Shapes{
         for(ConnectionPoint point:connectionPoints)
             point.move(x,y);
     }
-    public void debug(Graphics g){
-        isSelected = true;
-        g.drawString(String.valueOf(depth),x,y);
-    }
     public boolean getSelectedState(){return isSelected;}
     public void setSelectedState(boolean state){isSelected = state;}
     public void setDepth(int depth){this.depth=depth;}
+    public void setName(String name){this.name=name;}
     public double distance(int x1,int y1,int x2,int y2){
         return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
     }

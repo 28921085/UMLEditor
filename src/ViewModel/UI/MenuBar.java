@@ -1,7 +1,7 @@
 package ViewModel.UI;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MenuBar {
     private JMenuBar menuBar;
@@ -10,7 +10,6 @@ public class MenuBar {
     public MenuBar() {
         // 建立功能列
         menuBar = new JMenuBar();
-
         // 建立 File 功能
         JMenu fileMenu = new JMenu("File");
         JMenuItem newMenuItem = new JMenuItem("New");
@@ -39,5 +38,14 @@ public class MenuBar {
     // 取得功能列
     public JMenuBar getMenuBar() {
         return menuBar;
+    }
+    public void setRenameAction(ActionListener listener) {
+        // 设置 "Rename" 菜单项的行为函数
+        // 获取 Edit 功能菜单
+        JMenu editMenu = (JMenu) menuBar.getMenu(1); // Edit 功能菜单在菜单栏中的索引为 1
+        // 获取 Rename 菜单项
+        JMenuItem renameMenuItem = editMenu.getItem(0); // Rename 菜单项在 Edit 功能菜单中的索引为 0
+        // 为 Rename 菜单项添加 ActionListener
+        renameMenuItem.addActionListener(listener);
     }
 }

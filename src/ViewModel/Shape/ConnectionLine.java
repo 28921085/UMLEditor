@@ -61,7 +61,6 @@ public class ConnectionLine {
         if(distance(startX,startY,endX,endY)<ARROW_WIDTH)
             return;
         g.setColor(Color.BLACK);
-        //g.drawLine(startX,startY,endX,endY);
         Graphics2D g2d = (Graphics2D) g.create();
         drawLine(g2d);
     }

@@ -18,6 +18,13 @@ public class UseCaseShape extends Shapes{
     }
     public void drawShape(Graphics g){
         drawOvalWithStroke(x,y,width,height,3,g);
+        if (name != null) {
+            g.setColor(Color.BLACK);
+            // 将文本显示在矩形中心
+            int textX = x + width / 2 - g.getFontMetrics().stringWidth(name) / 2;
+            int textY = y + height / 2 + g.getFontMetrics().getHeight() / 2;
+            g.drawString(name, textX, textY);
+        }
     }
     public UseCaseShape(int x, int y,int width,int height){super(x,y,width,height);}
 }

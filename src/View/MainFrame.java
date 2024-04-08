@@ -3,6 +3,8 @@ package View;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import ViewModel.UI.ButtonPanel;
 import ViewModel.UI.DrawingPanel;
@@ -11,7 +13,7 @@ import ViewModel.UI.MenuBar;
 public class MainFrame {
     private JFrame frame;
     private JLabel label;
-    private DrawingPanel canvasPanel;
+    private DrawingPanel drawingPanel;
     private ButtonPanel buttonPanel;
     // 建構子
     public MainFrame() {
@@ -24,12 +26,43 @@ public class MainFrame {
 
         // 建立功能列
         MenuBar menuBar = new MenuBar();
+        menuBar.setRenameAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(drawingPanel.getCurrentSelect()==null) {
+                    JOptionPane.showMessageDialog(null, "沒有選擇任何物件");
+                    return;
+                }
+                // 创建一个文本输入框
+                JTextArea textArea = new JTextArea(5, 20);
+                // 将文本输入框放置在滚动面板中，以便可以滚动显示文本
+                JScrollPane scrollPane = new JScrollPane(textArea);
+                // 定义对话框的按钮
+                Object[] options = {"OK", "Cancel"};
+                // 显示对话框，并等待用户的操作
+                int result = JOptionPane.showOptionDialog(
+                        null,
+                        scrollPane,
+                        "Enter new name",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null, options, options[0]);
+                // 根据用户的操作结果执行相应的操作
+                if (result == JOptionPane.OK_OPTION) {
+                    drawingPanel.getCurrentSelect().setName(textArea.getText());
+                    System.out.println(textArea.getText());
+                    drawingPanel.repaint();
+                }
+                else
+                    JOptionPane.getRootFrame().dispose(); // 关闭对话框
+            }
+        });
 
         // 設定功能列到視窗中
         frame.setJMenuBar(menuBar.getMenuBar());
 
         //初始化畫布
-        canvasPanel = new DrawingPanel();
+        drawingPanel = new DrawingPanel();
 
         // 建立按鈕區域的面板
         buttonPanel = new ButtonPanel();
@@ -37,10 +70,10 @@ public class MainFrame {
         buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // 添加间距
 
         // 將 DrawingPanel 註冊為 ButtonPanel 的觀察者
-        buttonPanel.addObserver(canvasPanel);
+        buttonPanel.addObserver(drawingPanel);
 
         // 設定按鈕區域和畫布到視窗中
-        frame.add(canvasPanel, BorderLayout.CENTER);
+        frame.add(drawingPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.WEST); // 放在西側
 
         // 顯示視窗

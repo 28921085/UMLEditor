@@ -20,6 +20,14 @@ public class ClassShape extends Shapes{
         drawRectangleWithStroke(x,y,width,height/3,3,g);
         drawRectangleWithStroke(x,y+width/3,width,height/3,3,g);
         drawRectangleWithStroke(x,y+width/3*2,width,height/3,3,g);
+        // 调整文本位置到矩形内部
+        if (name != null) {
+            g.setColor(Color.BLACK);
+            // 将文本显示在矩形中心
+            int textX = x + width / 2 - g.getFontMetrics().stringWidth(name) / 2;
+            int textY = y + g.getFontMetrics().getHeight();
+            g.drawString(name, textX, textY);
+        }
     }
     public ClassShape(int x, int y,int width,int height){super(x,y,width,height);}
 }

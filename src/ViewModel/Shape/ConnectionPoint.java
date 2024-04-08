@@ -1,7 +1,5 @@
 package ViewModel.Shape;
 
-import Model.ConnectType;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

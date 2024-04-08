@@ -178,5 +178,8 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     public void updateSelect(ModeType modeType) {
         setCurrentMode(modeType);
     }
+
+    public Shapes getCurrentSelect() {return currentSelect;}
+
     public void setCurrentMode(ModeType currentMode) {this.currentMode = currentMode;}
 }
