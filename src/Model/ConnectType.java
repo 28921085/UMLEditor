@@ -19,23 +19,23 @@ public enum ConnectType {
         else if(this == ASSOCIATION_LINE_END){
             //draw arrow
             int smallerWidth = width*7/10;//sqrt(7*7+7*7) close to sqrt(10*10)
-            g.drawLine(x,y,x,y-width);
-            g.drawLine(x,y,x+smallerWidth,y-smallerWidth);
-            g.drawLine(x,y,x-smallerWidth,y-smallerWidth);
+            g.drawLine(x,y,x+width,y);
+            g.drawLine(x+width,y,x+width-smallerWidth,y+smallerWidth);
+            g.drawLine(x+width,y,x+width-smallerWidth,y-smallerWidth);
         }
         else if(this == GENERALIZATION_LINE_END){
             //triangle arrow
-            g.drawLine(x-width,y-width,x+width,y-width);
-            g.drawLine(x,y,x+width,y-width);
-            g.drawLine(x,y,x-width,y-width);
+            g.drawLine(x,y-width,x,y+width);
+            g.drawLine(x,y+width,x+width,y);
+            g.drawLine(x,y-width,x+width,y);
         }
         else if(this == COMPOSITION_LINE_END){
             //菱形 arrow
             int halfWidth=width/2;
-            g.drawLine(x,y,x-halfWidth,y-halfWidth);
+            g.drawLine(x,y,x+halfWidth,y+halfWidth);
             g.drawLine(x,y,x+halfWidth,y-halfWidth);
-            g.drawLine(x,y-width,x-halfWidth,y-halfWidth);
-            g.drawLine(x,y-width,x+halfWidth,y-halfWidth);
+            g.drawLine(x+halfWidth,y+halfWidth,x+width,y);
+            g.drawLine(x+halfWidth,y-halfWidth,x+width,y);
         }
         else{/*NONE*/}
     }

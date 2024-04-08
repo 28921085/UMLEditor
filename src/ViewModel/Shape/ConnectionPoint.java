@@ -8,15 +8,12 @@ import java.util.List;
 
 public class ConnectionPoint {
     int x,y,width;//width odd is better
-    ConnectType connectType;
     List<ConnectionLine> connectionLine = new ArrayList<>();
-    public void setConnectType(ConnectType type){connectType=type;}
     public void setConnectionLine(ConnectionLine line){connectionLine.add(line);}
     public ConnectionPoint(int x,int y,int width){
         this.x=x;
         this.y=y;
         this.width=width;
-        connectType=ConnectType.NONE;
     }
     public void draw(Graphics g){
         g.setColor(Color.BLUE);

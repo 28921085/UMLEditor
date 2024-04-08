@@ -43,23 +43,28 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                     reorderedComponentDepth();
                     unSelectAllComponents();
                 }
-                else if(currentMode == ModeType.ASSOCIATION_LINE){
+                else if(currentMode == ModeType.ASSOCIATION_LINE || currentMode == ModeType.COMPOSITION_LINE || currentMode == ModeType.GENERALIZATION_LINE){
                     currentSelect = selectShapeAtPoint(startX,startY);
                     if(currentSelect != null) {//有點到shape上
                         currentSelectPoint = currentSelect.assignConnectionPoint(startX, startY);
                         int x=currentSelectPoint.getX(),y=currentSelectPoint.getY();
-                        currentDrawing = new ConnectionLine(x,y,x,y);
+                        if(currentMode == ModeType.ASSOCIATION_LINE)
+                            currentDrawing = new ConnectionLine(x,y,x,y,ConnectType.ASSOCIATION_LINE_END);
+                        else if(currentMode == ModeType.COMPOSITION_LINE)
+                            currentDrawing = new ConnectionLine(x,y,x,y,ConnectType.COMPOSITION_LINE_END);
+                        else
+                            currentDrawing = new ConnectionLine(x,y,x,y,ConnectType.GENERALIZATION_LINE_END);
                     }
                     //if(currentSelectPoint != null)
                     //    currentSelectPoint.setConnectType(ConnectType.ASSOCIATION_LINE_END);
                     //unSelectAllComponents();
                 }
-                else if(currentMode == ModeType.COMPOSITION_LINE){
+                /*else if(currentMode == ModeType.COMPOSITION_LINE){
                     unSelectAllComponents();
                 }
                 else if(currentMode == ModeType.GENERALIZATION_LINE){
                     unSelectAllComponents();
-                }
+                }*/
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
@@ -69,11 +74,20 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 int y = e.getY();
                 mouseIsDragging = false;
 
-                if(currentMode == ModeType.ASSOCIATION_LINE){
+                if(currentMode == ModeType.ASSOCIATION_LINE ||
+                        currentMode == ModeType.COMPOSITION_LINE ||
+                        currentMode == ModeType.GENERALIZATION_LINE){
                     Shapes releasedShape = selectShapeAtPoint(x,y);
                     if(releasedShape != null){
                         ConnectionPoint releasedPoint = releasedShape.assignConnectionPoint(x,y);
-                        ConnectionLine line = new ConnectionLine(currentSelectPoint,releasedPoint);
+                        ConnectType type;
+                        if(currentMode == ModeType.ASSOCIATION_LINE)
+                            type = ConnectType.ASSOCIATION_LINE_END;
+                        else if(currentMode == ModeType.COMPOSITION_LINE)
+                            type = ConnectType.COMPOSITION_LINE_END;
+                        else
+                            type = ConnectType.GENERALIZATION_LINE_END;
+                        ConnectionLine line = new ConnectionLine(currentSelectPoint,releasedPoint,type);
                         currentSelectPoint.setConnectionLine(line);
                         releasedPoint.setConnectionLine(line);
                         lines.add(line);
@@ -107,7 +121,9 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                     startX=draggedX;
                     startY=draggedY;
                 }
-                else if(currentMode == ModeType.ASSOCIATION_LINE&&currentDrawing != null){//畫線
+                else if((currentMode == ModeType.ASSOCIATION_LINE||
+                        currentMode == ModeType.COMPOSITION_LINE||
+                        currentMode == ModeType.GENERALIZATION_LINE)&&currentDrawing != null){//畫線
                     currentDrawing.moveEnd(draggedX-startX,draggedY-startY);
                     startX=draggedX;
                     startY=draggedY;
