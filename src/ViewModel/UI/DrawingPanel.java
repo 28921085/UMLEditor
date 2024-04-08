@@ -73,7 +73,10 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                     Shapes releasedShape = selectShapeAtPoint(x,y);
                     if(releasedShape != null){
                         ConnectionPoint releasedPoint = releasedShape.assignConnectionPoint(x,y);
-                        lines.add(new ConnectionLine(currentSelectPoint.getX(), currentSelectPoint.getY(), releasedPoint.getX(), releasedPoint.getY()));
+                        ConnectionLine line = new ConnectionLine(currentSelectPoint,releasedPoint);
+                        currentSelectPoint.setConnectionLine(line);
+                        releasedPoint.setConnectionLine(line);
+                        lines.add(line);
                     }
                 }
 

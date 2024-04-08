@@ -5,12 +5,20 @@ import java.awt.*;
 public class ConnectionLine {
     int startX,startY,endX,endY,depth;
     private final int ARROW_WIDTH=21;//odd is better
-    Shapes start,end;
-    public ConnectionLine(int startX,int startY,int endX,int endY){
-        this.startX=startX;
-        this.startY=startY;
-        this.endX=endX;
-        this.endY=endY;
+    ConnectionPoint start,end;
+    public ConnectionLine(ConnectionPoint start,ConnectionPoint end){
+        this.start = start;
+        this.end = end;
+        startX=start.getX();
+        startY=start.getY();
+        endX=end.getX();
+        endY=end.getY();
+    }
+    public ConnectionLine(int startX,int startY,int endX,int endY) {//use for temp object
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
     }
     void moveStart(int x,int y){
         startX+=x;
