@@ -55,16 +55,8 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                         else
                             currentDrawing = new ConnectionLine(x,y,x,y,ConnectType.GENERALIZATION_LINE_END);
                     }
-                    //if(currentSelectPoint != null)
-                    //    currentSelectPoint.setConnectType(ConnectType.ASSOCIATION_LINE_END);
-                    //unSelectAllComponents();
+
                 }
-                /*else if(currentMode == ModeType.COMPOSITION_LINE){
-                    unSelectAllComponents();
-                }
-                else if(currentMode == ModeType.GENERALIZATION_LINE){
-                    unSelectAllComponents();
-                }*/
                 repaint();
                 //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }

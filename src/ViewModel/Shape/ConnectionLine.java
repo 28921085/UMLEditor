@@ -34,23 +34,19 @@ public class ConnectionLine {
         endY+=y;
     }
     void drawLine(Graphics g){
-// 计算线段的长度
+        // 计算线段的长度
         double totalLength = distance(startX, startY, endX, endY);
         if (totalLength < ARROW_WIDTH)
             return;
-
         // 计算比例
         double ratio = (totalLength - ARROW_WIDTH) / totalLength;
-
         // 根据比例计算新点的坐标
         int newX = (int) (startX + ratio * (endX - startX));
         int newY = (int) (startY + ratio * (endY - startY));
-
         // 计算直线的旋转角度
         double angle = Math.atan2(endY - startY, endX - startX);
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.drawLine(startX, startY, newX, newY);
-        g2d.rotate(Math.toRadians(angle), newX, newY); // 绕起点旋转
         // 抗锯齿 看起来会好看点
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // 根据角度旋转 Graphics2D 上下文
@@ -58,19 +54,6 @@ public class ConnectionLine {
         connectType.draw(g2d,newX,newY,ARROW_WIDTH);
         g2d.dispose();
     }
-    /*
-    public void drawPlug(Graphics g){
-        Graphics2D g2d = (Graphics2D) g.create(); // 创建副本以免影响原始 Graphics 对象
-        g2d.rotate(Math.toRadians(direction.getDegree()), x, y);
-
-        g2d.setStroke(new BasicStroke(3));
-        //抗鋸齒 看起來會好看點
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        connectType.draw(g2d,x,y,ARROW_WIDTH);
-
-        g2d.dispose();
-    }
-     */
     public double distance(int x1,int y1,int x2,int y2){
         return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
     }

@@ -8,7 +8,6 @@ public abstract class Shapes{
     int x,y,width,height,depth;
     boolean isSelected;
     String name;
-    List<Shapes> connect = new ArrayList<>();
     List<ConnectionPoint>connectionPoints = new ArrayList<>();
     public abstract void drawShape(Graphics g);
 
