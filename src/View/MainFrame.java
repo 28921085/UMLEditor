@@ -92,7 +92,15 @@ public class MainFrame {
                 drawingPanel.clear();
             }
         });
-
+        menuBar.setExitAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirmed = JOptionPane.showConfirmDialog(null, "確定要退出應用程式嗎？", "退出", JOptionPane.YES_NO_OPTION);
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
         // 設定功能列到視窗中
         frame.setJMenuBar(menuBar.getMenuBar());
 

@@ -15,7 +15,7 @@ public class MenuBar {
         JMenuItem newMenuItem = new JMenuItem("New");
         JMenuItem exitMenuItem = new JMenuItem("Exit");
         fileMenu.add(newMenuItem);
-        fileMenu.addSeparator();
+        //fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
 
         // 建立 Edit 功能
@@ -57,8 +57,13 @@ public class MenuBar {
         unGroupMenuItem.addActionListener(listener);
     }
     public void setNewAction(ActionListener listener){
-        JMenu editMenu = (JMenu) menuBar.getMenu(0);
-        JMenuItem newMenuItem = editMenu.getItem(0);
+        JMenu fileMenu = (JMenu) menuBar.getMenu(0);
+        JMenuItem newMenuItem = fileMenu.getItem(0);
         newMenuItem.addActionListener(listener);
+    }
+    public void setExitAction(ActionListener listener){
+        JMenu fileMenu = (JMenu) menuBar.getMenu(0);
+        JMenuItem exitMenuItem = fileMenu.getItem(1);
+        exitMenuItem.addActionListener(listener);
     }
 }
