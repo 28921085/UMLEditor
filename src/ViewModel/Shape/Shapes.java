@@ -7,24 +7,29 @@ import java.util.List;
 public abstract class Shapes{
     int x,y,width,height,depth;
     boolean isSelected;
+    public boolean isComposite;
     String name;
     List<ConnectionPoint>connectionPoints = new ArrayList<>();
     public abstract void drawShape(Graphics g);
-
+    public Shapes(){
+        isSelected=false;
+        isComposite=true;
+    }
     public Shapes(int x,int y,int width,int height){
         this.x=x;
         this.y=y;
         this.width=width;
         this.height=height;
         isSelected = false;
+        isComposite=false;
         name = "";
         generateConnectionPoints();
     }
     public void generateConnectionPoints(){
-        connectionPoints.add(new ConnectionPoint(x+width/2,y,11));
-        connectionPoints.add(new ConnectionPoint(x+width,y+height/2,11));
-        connectionPoints.add(new ConnectionPoint(x+width/2,y+height,11));
-        connectionPoints.add(new ConnectionPoint(x,y+height/2,11));
+        connectionPoints.add(new ConnectionPoint(x+width/2,y,11));//top
+        connectionPoints.add(new ConnectionPoint(x,y+height/2,11));//left
+        connectionPoints.add(new ConnectionPoint(x+width,y+height/2,11));//right
+        connectionPoints.add(new ConnectionPoint(x+width/2,y+height,11));//bottom
         //TODO check this point position may have bug
     }
     public void drawConnectionPoints(Graphics g){
@@ -34,8 +39,7 @@ public abstract class Shapes{
             point.draw(g);
     }
     public void draw(Graphics g){
-        //debug
-        //debug(g);
+        //System.out.println("shape");
         drawShape(g);
         drawConnectionPoints(g);
     }

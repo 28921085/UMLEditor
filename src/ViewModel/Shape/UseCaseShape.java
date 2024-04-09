@@ -17,6 +17,7 @@ public class UseCaseShape extends Shapes{
         g2d.drawOval(X, Y, width, height);
     }
     public void drawShape(Graphics g){
+        //System.out.println("Use case\n");
         drawOvalWithStroke(x,y,width,height,3,g);
         if (name != null) {
             g.setColor(Color.BLACK);

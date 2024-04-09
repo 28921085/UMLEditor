@@ -4,6 +4,8 @@ import Model.ConnectType;
 import Model.ModeType;
 import Model.ModeObserver;
 import ViewModel.Shape.*;
+import ViewModel.Shape.Composite;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -31,6 +33,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
                 startY = e.getY();
+                if(!groupSelect.isEmpty()){
+                    for(int i=groupSelect.size()-1;i>-1;i--)
+                        components.add(0,groupSelect.get(i));
+                    groupSelect.clear();
+                }
                 if(currentMode == ModeType.SELECT){
                     currentSelect = selectShapeAtPoint(startX,startY);
                 }
@@ -59,7 +66,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
 
                 }
                 repaint();
-                //System.out.println("滑鼠pressed位置：(" + startX + ", " + startY + ")");
             }
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -75,6 +81,8 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                             shape.setSelectedState(true);
                         }
                     }
+                    for(Shapes shape:groupSelect)
+                        components.remove(shape);
                 }
                 else if(currentMode == ModeType.ASSOCIATION_LINE ||
                         currentMode == ModeType.COMPOSITION_LINE ||
@@ -130,6 +138,12 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             }
         });
     }
+    public List<Shapes> getGroupSelect(){return groupSelect;}
+    public void group(){
+        unSelectAllComponents();
+        components.add(new Composite(groupSelect));
+        groupSelect.clear();
+    }
     Shapes selectShapeAtPoint(int x,int y){
         unSelectAllComponents();
         for(int i=0;i<components.size();i++){
@@ -160,6 +174,8 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         currentSelect = null;
         for(Shapes shape:components)
             shape.setSelectedState(false);
+        for(Shapes shape:groupSelect)
+            shape.setSelectedState(false);
     }
     void reorderedComponentDepth(){//變相地進行sort
         for(int i=0;i<components.size();i++)
@@ -172,6 +188,9 @@ public class DrawingPanel extends JPanel implements ModeObserver {
             components.get(i).draw(g);
         if(currentMode == ModeType.SELECT&&currentSelect == null&&mouseIsDragging)
             drawSelectedArea(startX,startY,draggedX,draggedY,g);
+
+        for(Shapes shape:groupSelect)
+            shape.draw(g);
 
         for(ConnectionLine line:lines)
             line.draw(g);

@@ -30,7 +30,7 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(drawingPanel.getCurrentSelect()==null) {
-                    JOptionPane.showMessageDialog(null, "沒有選擇任何物件");
+                    JOptionPane.showMessageDialog(null, "沒有選擇任何物件或選擇過多物件");
                     return;
                 }
                 // 创建一个文本输入框
@@ -55,6 +55,16 @@ public class MainFrame {
                 }
                 else
                     JOptionPane.getRootFrame().dispose(); // 关闭对话框
+            }
+        });
+        menuBar.setGroupAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(drawingPanel.getGroupSelect().size()<2){
+                    JOptionPane.showMessageDialog(null, "至少需要選擇2個物件");
+                    return;
+                }
+                drawingPanel.group();
             }
         });
 

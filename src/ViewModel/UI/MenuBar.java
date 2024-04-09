@@ -48,4 +48,9 @@ public class MenuBar {
         // 为 Rename 菜单项添加 ActionListener
         renameMenuItem.addActionListener(listener);
     }
+    public void setGroupAction(ActionListener listener){
+        JMenu editMenu = (JMenu) menuBar.getMenu(1);
+        JMenuItem groupMenuItem = editMenu.getItem(1);
+        groupMenuItem.addActionListener(listener);
+    }
 }
