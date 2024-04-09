@@ -20,6 +20,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     private boolean mouseIsDragging;
     private int startX, startY,draggedX,draggedY;
     private Shapes currentSelect=null;
+    private List<Shapes>groupSelect=new ArrayList<>();
     private ConnectionPoint currentSelectPoint = null;
     private ConnectionLine currentDrawing = null;
     public DrawingPanel() {
@@ -66,7 +67,16 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 int y = e.getY();
                 mouseIsDragging = false;
 
-                if(currentMode == ModeType.ASSOCIATION_LINE ||
+                if(currentMode == ModeType.SELECT&&currentSelect==null){
+                    groupSelect.clear();
+                    for(Shapes shape:components) {
+                        if (shape.isInArea(startX, startY, x, y)) {
+                            groupSelect.add(shape);
+                            shape.setSelectedState(true);
+                        }
+                    }
+                }
+                else if(currentMode == ModeType.ASSOCIATION_LINE ||
                         currentMode == ModeType.COMPOSITION_LINE ||
                         currentMode == ModeType.GENERALIZATION_LINE){
                     Shapes releasedShape = selectShapeAtPoint(x,y);
@@ -94,13 +104,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 //TODO
                 //group
             }
-            //@Override
-            //public void mouseClicked(MouseEvent e) {
-            //    int x = e.getX();
-            //    int y = e.getY();
-            //    repaint();
-            //    //System.out.println("滑鼠點擊位置：(" + x + ", " + y + ")");
-            //}
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -108,10 +111,13 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 draggedX = e.getX();
                 draggedY = e.getY();
                 mouseIsDragging = true;
-                if(currentMode == ModeType.SELECT&&currentSelect != null){//每次觸發mouse dragged都視為一個獨立的事件
-                    currentSelect.move(draggedX-startX,draggedY-startY);
-                    startX=draggedX;
-                    startY=draggedY;
+                if(currentMode == ModeType.SELECT){
+                    if(currentSelect != null){//drag object
+                        currentSelect.move(draggedX-startX,draggedY-startY);
+                        startX=draggedX;
+                        startY=draggedY;
+                    }
+                    else{/*not set start(x,y)=dragged(x,y)*/}
                 }
                 else if((currentMode == ModeType.ASSOCIATION_LINE||
                         currentMode == ModeType.COMPOSITION_LINE||
@@ -121,7 +127,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                     startY=draggedY;
                 }
                 repaint();
-                //System.out.println("滑鼠dragged位置：(" + x + ", " + y + ")");
             }
         });
     }
@@ -165,7 +170,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         //較深的先畫
         for (int i=components.size()-1;i>-1;i--)
             components.get(i).draw(g);
-        if(currentMode == ModeType.SELECT&&mouseIsDragging)
+        if(currentMode == ModeType.SELECT&&currentSelect == null&&mouseIsDragging)
             drawSelectedArea(startX,startY,draggedX,draggedY,g);
 
         for(ConnectionLine line:lines)

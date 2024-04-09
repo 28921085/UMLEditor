@@ -52,6 +52,14 @@ public abstract class Shapes{
         for(ConnectionPoint point:connectionPoints)
             point.move(x,y);
     }
+    public boolean isInArea(int x1,int y1,int x2,int y2){
+        int width = Math.abs(x2-x1),height = Math.abs(y2-y1);
+        int x = Math.min(x1,x2), y = Math.min(y1,y2);
+        for(ConnectionPoint point:connectionPoints)
+            if(point.x<x||point.x>x+width||point.y<y||point.y>y+height)
+                return false;
+        return true;
+    }
     public boolean getSelectedState(){return isSelected;}
     public void setSelectedState(boolean state){isSelected = state;}
     public void setDepth(int depth){this.depth=depth;}
