@@ -23,12 +23,10 @@ public class MenuBar {
         JMenuItem renameMenuItem = new JMenuItem("Rename");
         JMenuItem groupMenuItem = new JMenuItem("Group");
         JMenuItem ungroupMenuItem = new JMenuItem("Ungroup");
-        JMenuItem deleteMenuItem = new JMenuItem("Delete");
 
         editMenu.add(renameMenuItem);
         editMenu.add(groupMenuItem);
         editMenu.add(ungroupMenuItem);
-        editMenu.add(deleteMenuItem);
 
         // 將功能加入功能列
         menuBar.add(fileMenu);
@@ -57,5 +55,10 @@ public class MenuBar {
         JMenu editMenu = (JMenu) menuBar.getMenu(1);
         JMenuItem unGroupMenuItem = editMenu.getItem(2);
         unGroupMenuItem.addActionListener(listener);
+    }
+    public void setNewAction(ActionListener listener){
+        JMenu editMenu = (JMenu) menuBar.getMenu(0);
+        JMenuItem newMenuItem = editMenu.getItem(0);
+        newMenuItem.addActionListener(listener);
     }
 }

@@ -86,6 +86,12 @@ public class MainFrame {
                 drawingPanel.setCurrentSelect(null);
             }
         });
+        menuBar.setNewAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawingPanel.clear();
+            }
+        });
 
         // 設定功能列到視窗中
         frame.setJMenuBar(menuBar.getMenuBar());
