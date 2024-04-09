@@ -26,12 +26,8 @@ public class RoundedButton extends JButton {
         height = 100;
         iconImage = tmp.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(iconImage);
-        setBorderColorBlack();
+        setBorderColorWhite();
 
-        // 設定按鈕大小
-
-        // 設置按鈕大小
-        //setBounds(0, 0, width, height);
         setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 
         // 添加點擊事件監聽器
@@ -39,7 +35,7 @@ public class RoundedButton extends JButton {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 在這裡添加按鈕被點擊時的操作
-                setBorderColorRed();
+                setBorderColorBlack();
             }
         });
     }
@@ -72,12 +68,16 @@ public class RoundedButton extends JButton {
         borderColor = Color.BLACK;
         repaint();
     }
+    public void setBorderColorWhite(){
+        borderColor = Color.WHITE;
+        repaint();
+    }
 
     public void setBorderColorRed() {
         borderColor = Color.RED;
         repaint();
     }
     public void resetButton(RoundedButton button){
-        button.setBorderColorBlack();
+        button.setBorderColorWhite();
     }
 }
