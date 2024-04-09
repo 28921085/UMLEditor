@@ -144,6 +144,11 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         components.add(new Composite(groupSelect));
         groupSelect.clear();
     }
+    public void unGroup(Composite composite){
+        for(Shapes shape:composite.composite)
+            components.add(0,shape);
+        components.remove(composite);
+    }
     Shapes selectShapeAtPoint(int x,int y){
         unSelectAllComponents();
         for(int i=0;i<components.size();i++){
@@ -204,6 +209,7 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     }
 
     public Shapes getCurrentSelect() {return currentSelect;}
+    public void setCurrentSelect(Shapes shape){currentSelect=shape;}
 
     public void setCurrentMode(ModeType currentMode) {this.currentMode = currentMode;}
 }

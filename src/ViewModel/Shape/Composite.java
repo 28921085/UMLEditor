@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite extends Shapes{
-    List<Shapes> composite = new ArrayList<>();
+    public List<Shapes> composite = new ArrayList<>();
     public Composite(List<Shapes> list){
         super();
         composite.addAll(list);
         generateConnectionPoints();
     }
     public void drawShape(Graphics g) {
-        //System.out.println("composite");
-        for(Shapes shape:composite) {
-            //System.out.println(shape.x+" "+shape.y);
+        for(Shapes shape:composite)
             shape.draw(g);
-        }
-        //System.out.println();
     }
     @Override
     public void generateConnectionPoints(){
@@ -32,13 +28,11 @@ public class Composite extends Shapes{
         y=ymin;
         width=xmax-xmin;
         height=ymax-ymin;
-        //System.out.println(x+" "+y+" "+width+" "+height);
+
         connectionPoints.add(new ConnectionPoint((xmin+xmax)/2,ymin,11));//top
         connectionPoints.add(new ConnectionPoint(xmin,(ymin+ymax)/2,11));//left
         connectionPoints.add(new ConnectionPoint(xmax,(ymin+ymax)/2,11));//right
         connectionPoints.add(new ConnectionPoint((xmin+xmax)/2,ymax,11));//bottom
-        //for(ConnectionPoint point:connectionPoints)
-        //    System.out.println(point.x+" "+point.y);
     }
     @Override
     public void move(int x,int y){

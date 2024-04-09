@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ViewModel.Shape.Composite;
 import ViewModel.UI.ButtonPanel;
 import ViewModel.UI.DrawingPanel;
 import ViewModel.UI.MenuBar;
@@ -33,6 +34,10 @@ public class MainFrame {
                     JOptionPane.showMessageDialog(null, "沒有選擇任何物件或選擇過多物件");
                     return;
                 }
+                if(drawingPanel.getCurrentSelect() instanceof Composite){
+                    JOptionPane.showMessageDialog(null, "請不要選擇composite物件");
+                    return;
+                }
                 // 创建一个文本输入框
                 JTextArea textArea = new JTextArea(5, 20);
                 // 将文本输入框放置在滚动面板中，以便可以滚动显示文本
@@ -50,7 +55,6 @@ public class MainFrame {
                 // 根据用户的操作结果执行相应的操作
                 if (result == JOptionPane.OK_OPTION) {
                     drawingPanel.getCurrentSelect().setName(textArea.getText());
-                    System.out.println(textArea.getText());
                     drawingPanel.repaint();
                 }
                 else
@@ -65,6 +69,21 @@ public class MainFrame {
                     return;
                 }
                 drawingPanel.group();
+            }
+        });
+        menuBar.setUnGroupAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(drawingPanel.getCurrentSelect()==null){
+                    JOptionPane.showMessageDialog(null, "請使用Select模式\"單擊\"一個物件");
+                    return;
+                }
+                else if(!(drawingPanel.getCurrentSelect() instanceof Composite)){
+                    JOptionPane.showMessageDialog(null, "選中的物件不是composite物件");
+                    return;
+                }
+                drawingPanel.unGroup((Composite) drawingPanel.getCurrentSelect());
+                drawingPanel.setCurrentSelect(null);
             }
         });
 

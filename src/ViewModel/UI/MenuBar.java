@@ -53,4 +53,9 @@ public class MenuBar {
         JMenuItem groupMenuItem = editMenu.getItem(1);
         groupMenuItem.addActionListener(listener);
     }
+    public void setUnGroupAction(ActionListener listener){
+        JMenu editMenu = (JMenu) menuBar.getMenu(1);
+        JMenuItem unGroupMenuItem = editMenu.getItem(2);
+        unGroupMenuItem.addActionListener(listener);
+    }
 }
