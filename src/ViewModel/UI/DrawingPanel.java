@@ -88,6 +88,13 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                         currentMode == ModeType.COMPOSITION_LINE ||
                         currentMode == ModeType.GENERALIZATION_LINE){
                     Shapes releasedShape = selectShapeAtPoint(x,y);
+                    /*if(currentSelect.isComposite||releasedShape==null||releasedShape.isComposite) {
+                        currentSelectPoint = null;
+                        currentDrawing = null;
+
+                        repaint();
+                        return;
+                    }*/
                     if(releasedShape != null){
                         ConnectionPoint releasedPoint = releasedShape.assignConnectionPoint(x,y);
                         ConnectType type;
