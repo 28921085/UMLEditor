@@ -3,7 +3,10 @@ package ViewModel.UI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import ViewModel.Shape.Composite;
+import ViewModel.Shape.Shapes;
 import ViewModel.UI.DrawingPanel;
 
 public class MenuBar {
@@ -100,9 +103,15 @@ public class MenuBar {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (drawingPanel.getCurrentSelect() == null) {
-                JOptionPane.showMessageDialog(null, "請使用Select模式\"單擊\"一個物件");
+                List<Shapes>groupSelect=drawingPanel.getGroupSelect();
+                System.out.println(groupSelect.size());
+                System.out.println(groupSelect.get(0).isComposite);
+                if(groupSelect.size()==1&&groupSelect.get(0).isComposite)
+                    drawingPanel.unGroup((Composite) groupSelect.get(0));
+                else
+                    JOptionPane.showMessageDialog(null, "請選擇恰好一個物件");
                 return;
-            } else if (!(drawingPanel.getCurrentSelect() instanceof Composite)) {
+            } else if (!(drawingPanel.getCurrentSelect().isComposite)) {
                 JOptionPane.showMessageDialog(null, "選中的物件不是composite物件");
                 return;
             }

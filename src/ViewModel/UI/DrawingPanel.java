@@ -115,9 +115,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
                 currentDrawing = null;
 
                 repaint();
-                //System.out.println("滑鼠放開位置：(" + x + ", " + y + ")");
-                //TODO
-                //group
             }
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
@@ -150,11 +147,14 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         unSelectAllComponents();
         components.add(new Composite(groupSelect));
         groupSelect.clear();
+        repaint();
     }
     public void unGroup(Composite composite){
+        groupSelect.clear();
         for(Shapes shape:composite.composite)
             components.add(0,shape);
         components.remove(composite);
+        repaint();
     }
     Shapes selectShapeAtPoint(int x,int y){
         unSelectAllComponents();

@@ -11,14 +11,12 @@ import ViewModel.UI.MenuBar;
 
 public class MainFrame {
     private JFrame frame;
-    private JLabel label;
     private DrawingPanel drawingPanel;
     private ButtonPanel buttonPanel;
 
     // 建構子
     public MainFrame() {
         frame = new JFrame("UMLEditor");
-        label = new JLabel("Hello, World!");
 
         // 設定視窗大小和關閉動作
         frame.setSize(1500, 1000);
@@ -47,10 +45,5 @@ public class MainFrame {
 
         // 顯示視窗
         frame.setVisible(true);
-    }
-
-    // 設定標籤文字
-    public void setLabelText(String text) {
-        label.setText(text);
     }
 }
