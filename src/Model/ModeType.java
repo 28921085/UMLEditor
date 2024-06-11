@@ -34,4 +34,7 @@ public enum ModeType {
         }
         return res;
     }
+    public boolean isLine(){
+        return (this==ASSOCIATION_LINE||this==GENERALIZATION_LINE||this==COMPOSITION_LINE);
+    }
 }
