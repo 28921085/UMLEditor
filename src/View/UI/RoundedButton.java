@@ -1,12 +1,8 @@
-package ViewModel.UI;
+package View.UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 
 public class RoundedButton extends JButton {
     private static final int CORNER_RADIUS = 15;
@@ -29,15 +25,6 @@ public class RoundedButton extends JButton {
         setBorderColorWhite();
 
         setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-
-        // 添加點擊事件監聽器
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 在這裡添加按鈕被點擊時的操作
-                setBorderColorBlack();
-            }
-        });
     }
 
     @Override
@@ -70,11 +57,6 @@ public class RoundedButton extends JButton {
     }
     public void setBorderColorWhite(){
         borderColor = Color.WHITE;
-        repaint();
-    }
-
-    public void setBorderColorRed() {
-        borderColor = Color.RED;
         repaint();
     }
     public void resetButton(RoundedButton button){

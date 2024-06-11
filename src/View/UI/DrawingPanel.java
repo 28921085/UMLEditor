@@ -1,10 +1,10 @@
-package ViewModel.UI;
+package View.UI;
 
 import Controller.MouseController;
 import Model.ModeType;
 import Model.ModeObserver;
-import ViewModel.Shape.*;
-import ViewModel.Shape.Composite;
+import View.Shape.*;
+import View.Shape.Composite;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,8 +37,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     public boolean isMouseIsDragging() { return mouseIsDragging; }
     public int getStartX() { return startX; }
     public int getStartY() { return startY; }
-    public int getDraggedX() { return draggedX; }
-    public int getDraggedY() { return draggedY; }
     public void setCurrentSelect(Shapes shape) { currentSelect = shape; }
     public void setCurrentMode(ModeType currentMode) { this.currentMode = currentMode; }
     public void setCurrentSelectPoint(ConnectionPoint point) { currentSelectPoint = point; }
@@ -46,14 +44,12 @@ public class DrawingPanel extends JPanel implements ModeObserver {
     public void setMouseIsDragging(boolean isDragging) { mouseIsDragging = isDragging; }
     public void setStartCoordinates(int x, int y) { startX = x; startY = y; }
     public void setDraggedCoordinates(int x, int y) { draggedX = x; draggedY = y; }
-
     public void group() {
         unSelectAllComponents();
         components.add(new Composite(groupSelect));
         groupSelect.clear();
         repaint();
     }
-
     public void unGroup(Composite composite) {
         groupSelect.clear();
         for (Shapes shape : composite.composite)
@@ -61,7 +57,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         components.remove(composite);
         repaint();
     }
-
     public Shapes selectShapeAtPoint(int x, int y) {
         unSelectAllComponents();
         for (int i = 0; i < components.size(); i++) {
@@ -75,7 +70,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         }
         return null;
     }
-
     public void drawSelectedArea(int x1, int y1, int x2, int y2, Graphics g) {
         int width = Math.abs(x2 - x1), height = Math.abs(y2 - y1);
         int x = Math.min(x1, x2), y = Math.min(y1, y2);
@@ -85,7 +79,6 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         g2d.fillRect(x, y, width, height);
         g2d.drawRect(x, y, width, height);
     }
-
     public void unSelectAllComponents() {
         currentSelect = null;
         for (Shapes shape : components)
@@ -93,12 +86,10 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         for (Shapes shape : groupSelect)
             shape.setSelectedState(false);
     }
-
     public void reorderedComponentDepth() {
         for (int i = 0; i < components.size(); i++)
             components.get(i).setDepth(i);
     }
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (int i = components.size() - 1; i > -1; i--)
@@ -115,12 +106,10 @@ public class DrawingPanel extends JPanel implements ModeObserver {
         if (currentDrawing != null)
             currentDrawing.draw(g);
     }
-
     @Override
     public void updateSelect(ModeType modeType) {
         setCurrentMode(modeType);
     }
-
     public void clear() {
         components.clear();
         lines.clear();

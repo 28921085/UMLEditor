@@ -1,13 +1,12 @@
-package ViewModel.UI;
+package View.UI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import ViewModel.Shape.Composite;
-import ViewModel.Shape.Shapes;
-import ViewModel.UI.DrawingPanel;
+import View.Shape.Composite;
+import View.Shape.Shapes;
 
 public class MenuBar {
     private JMenuBar menuBar;

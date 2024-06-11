@@ -1,4 +1,4 @@
-package ViewModel.Shape;
+package View.Shape;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ public abstract class Shapes{
         connectionPoints.add(new ConnectionPoint(x,y+height/2,11));//left
         connectionPoints.add(new ConnectionPoint(x+width,y+height/2,11));//right
         connectionPoints.add(new ConnectionPoint(x+width/2,y+height,11));//bottom
-        //TODO check this point position may have bug
     }
     public void drawConnectionPoints(Graphics g){
         if(!isSelected)
@@ -39,7 +38,6 @@ public abstract class Shapes{
             point.draw(g);
     }
     public void draw(Graphics g){
-        //System.out.println("shape");
         drawShape(g);
         drawConnectionPoints(g);
     }
@@ -64,7 +62,6 @@ public abstract class Shapes{
                 return false;
         return true;
     }
-    public boolean getSelectedState(){return isSelected;}
     public void setSelectedState(boolean state){isSelected = state;}
     public void setDepth(int depth){this.depth=depth;}
     public void setName(String name){this.name=name;}

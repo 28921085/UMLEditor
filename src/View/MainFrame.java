@@ -4,10 +4,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-import ViewModel.Shape.Composite;
-import ViewModel.UI.ButtonPanel;
-import ViewModel.UI.DrawingPanel;
-import ViewModel.UI.MenuBar;
+import View.UI.ButtonPanel;
+import View.UI.DrawingPanel;
+import View.UI.MenuBar;
 
 public class MainFrame {
     private JFrame frame;

@@ -2,8 +2,8 @@ package Controller;
 
 import Model.ConnectType;
 import Model.ModeType;
-import ViewModel.Shape.*;
-import ViewModel.UI.DrawingPanel;
+import View.Shape.*;
+import View.UI.DrawingPanel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

@@ -1,11 +1,11 @@
-package ViewModel.Shape;
+package View.Shape;
 
 import Model.ConnectType;
 
 import java.awt.*;
 
 public class ConnectionLine {
-    int startX,startY,endX,endY,depth;
+    int startX,startY,endX,endY;
     private final int ARROW_WIDTH=21;//odd is better
     ConnectionPoint start,end;
     ConnectType connectType;

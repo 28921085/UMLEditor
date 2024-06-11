@@ -1,4 +1,4 @@
-package ViewModel.UI;
+package View.UI;
 
 import Model.ModeObserver;
 import Model.ModeType;
@@ -28,7 +28,7 @@ public class ButtonPanel extends JPanel{
                     notifyObservers(getCurrentMode());
                     //change UI
                     unSelectAllButtons();
-                    button.setBorderColorRed();
+                    button.setBorderColorBlack();
                 }
             });
             buttons.add(button);
